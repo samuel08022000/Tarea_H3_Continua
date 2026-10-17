@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_minimarket
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: db_minimarket_pro413
+      MYSQL_USER: minimarket_user
+      MYSQL_PASSWORD: minimarket1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - minimarket_network
+
+volumes:
+  mysql_data:
+
+networks:
+  minimarket_network:
+    driver: bridge
